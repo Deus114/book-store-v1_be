@@ -26,18 +26,30 @@ module.exports = {
     // Paginate
     getallCategory: async (page, limit) => {
         try {
-            let offset = (page - 1) * limit;
-            let totalPage = (await Category.find()).length / limit;
-            let res = await Category.find().skip(offset).limit(limit).exec();
-            let result = {
-                DT: {
-                    totalPages: Math.ceil(totalPage),
-                    users: res
-                },
-                EC: 0,
-                EM: "GetAll list category succeed"
-            };
-            return result;
+            if (limit && page) {
+                let offset = (page - 1) * limit;
+                let totalPage = (await Category.find()).length / limit;
+                let res = await Category.find().skip(offset).limit(limit).exec();
+                let result = {
+                    DT: {
+                        totalPages: Math.ceil(totalPage),
+                        categories: res
+                    },
+                    EC: 0,
+                    EM: "GetAll list category succeed"
+                };
+                return result;
+            }
+            else {
+                let res = await Category.find();
+                let result = {
+                    DT: res,
+                    EC: 0,
+                    EM: "GetAll list category succeed"
+                };
+                return result;
+            }
+
         } catch (error) {
             let result = {
                 DT: null,
