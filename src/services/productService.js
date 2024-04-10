@@ -76,6 +76,45 @@ module.exports = {
         }
     },
 
+    getProductbuy: async (limit) => {
+        try {
+
+            let res = await Product.find({ status: "SHOW" }).sort({ buy: -1 }).limit(limit).exec()
+            let result = {
+                DT: res,
+                EC: 0,
+                EM: "GetAll list product succeed"
+            };
+            return result;
+        } catch (error) {
+            let result = {
+                DT: null,
+                EC: -1,
+                EM: "GetAll list product failed"
+            };
+            return result;
+        }
+    },
+
+    getProductbyCat: async (category) => {
+        try {
+            let res = await Product.find({ category: category }).sort({ createdAt: -1 }).exec();
+            let result = {
+                DT: res,
+                EC: 0,
+                EM: "GetAll list product succeed"
+            };
+            return result;
+        } catch (error) {
+            let result = {
+                DT: null,
+                EC: -1,
+                EM: "GetAll list product failed"
+            };
+            return result;
+        }
+    },
+
     updateProduct: async (data) => {
         try {
             if (data.image === "") {

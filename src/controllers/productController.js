@@ -1,4 +1,4 @@
-const { createProduct, getallProduct, updateProduct, delProduct, getProductnew } = require("../services/productService");
+const { createProduct, getallProduct, updateProduct, delProduct, getProductnew, getProductbuy, getProductbyCat } = require("../services/productService");
 const { sFile } = require("../services/file");
 const fs = require('fs');
 
@@ -38,6 +38,7 @@ module.exports = {
             }
         )
     },
+
     getAllProduct: async (req, res) => {
         let limit = req.query.limit;
         let page = req.query.page;
@@ -55,6 +56,32 @@ module.exports = {
     getProductNew: async (req, res) => {
         let limit = 8;
         let result = await getProductnew(limit);
+
+        return res.status(200).json(
+            {
+                DT: result.DT,
+                EC: result.EC,
+                EM: result.EM
+            }
+        )
+    },
+
+    getProductBuy: async (req, res) => {
+        let limit = 8;
+        let result = await getProductbuy(limit);
+
+        return res.status(200).json(
+            {
+                DT: result.DT,
+                EC: result.EC,
+                EM: result.EM
+            }
+        )
+    },
+
+    getProductByCat: async (req, res) => {
+        let category = req.query.category;
+        let result = await getProductbyCat(category);
 
         return res.status(200).json(
             {
