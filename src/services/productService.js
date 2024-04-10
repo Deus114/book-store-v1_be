@@ -59,7 +59,7 @@ module.exports = {
     getProductnew: async (limit) => {
         try {
 
-            let res = await Product.find({ status: "SHOW" }).sort({ createdAt: -1 }).limit(limit).exec()
+            let res = await Product.find({ status: "SHOW" }).sort({ createdAt: -1 }).limit(limit).exec();
             let result = {
                 DT: res,
                 EC: 0,
@@ -98,13 +98,25 @@ module.exports = {
 
     getProductbyCat: async (category) => {
         try {
-            let res = await Product.find({ category: category }).sort({ createdAt: -1 }).exec();
-            let result = {
-                DT: res,
-                EC: 0,
-                EM: "GetAll list product succeed"
-            };
-            return result;
+            if (category) {
+                let res = await Product.find({ category: category }).sort({ createdAt: -1 }).exec();
+
+                let result = {
+                    DT: res,
+                    EC: 0,
+                    EM: "GetAll list product succeed"
+                };
+                return result;
+            } else {
+                let res = await Product.find().sort({ createdAt: -1 }).exec();
+
+                let result = {
+                    DT: res,
+                    EC: 0,
+                    EM: "GetAll list product succeed"
+                };
+                return result;
+            }
         } catch (error) {
             let result = {
                 DT: null,
