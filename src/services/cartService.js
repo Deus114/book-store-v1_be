@@ -88,5 +88,24 @@ module.exports = {
             };
             return result;
         }
-    }
+    },
+
+    deleteCart: async (id) => {
+        try {
+            let cart = await Cart.deleteOne({ _id: id });
+            let result = {
+                DT: cart,
+                EC: 0,
+                EM: "Delete product success"
+            };
+            return result;
+        } catch (error) {
+            let result = {
+                DT: null,
+                EC: -1,
+                EM: error
+            };
+            return result;
+        }
+    },
 }

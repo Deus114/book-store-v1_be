@@ -55,13 +55,13 @@ const getallUser = async (page, limit) => {
 const updateUser = async (data) => {
     try {
         if (data.image === "") {
-            let res = await User.updateOne({ _id: data.id },
+            let res = await User.findByIdAndUpdate(data.id,
                 {
                     username: data.username,
                     phone: data.phone,
                     address: data.address,
                     role: data.role
-                });
+                }, { new: true });
             let result = {
                 DT: res,
                 EC: 0,

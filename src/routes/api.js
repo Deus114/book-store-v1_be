@@ -6,7 +6,8 @@ const { postCreateUser, getAllUser, putUpdateUser, deleteUser } = require('../co
 const { postRegister, postLogin } = require('../controllers/authController');
 const { postCreateCategory, getAllCategory, putUpdateCategory, deleteCategory } = require('../controllers/categoryController');
 const { postCreateProduct, getAllProduct, putUpdateProduct, deleteProduct, getProductNew, getProductBuy, getProductByCat } = require('../controllers/productController');
-const { postAddCart, getCart } = require('../controllers/cartController');
+const { postAddCart, getCart, delCart } = require('../controllers/cartController');
+const { getAdminBoard } = require('../controllers/adminboardController');
 
 // routerAPI.post('/file', postSFile);
 // User api
@@ -33,9 +34,13 @@ routerAPI.delete('/delete-product', deleteProduct);
 // Cart api
 routerAPI.post('/cart', postAddCart);
 routerAPI.get('/user-cart', getCart);
+routerAPI.delete('/delete-cart', delCart);
 
 // Auth api
 routerAPI.post('/register', postRegister);
 routerAPI.post('/login', postLogin);
+
+// Admin board Api
+routerAPI.get('/admin-board', getAdminBoard);
 
 module.exports = routerAPI;
