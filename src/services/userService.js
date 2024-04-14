@@ -9,7 +9,6 @@ const createUser = async (data) => {
             address: data.address,
             phone: data.phone,
             role: data.role,
-            image: data.image
         })
         let result = {
             DT: res,
@@ -54,37 +53,19 @@ const getallUser = async (page, limit) => {
 
 const updateUser = async (data) => {
     try {
-        if (data.image === "") {
-            let res = await User.findByIdAndUpdate(data.id,
-                {
-                    username: data.username,
-                    phone: data.phone,
-                    address: data.address,
-                    role: data.role
-                }, { new: true });
-            let result = {
-                DT: res,
-                EC: 0,
-                EM: "Update user succeed"
-            };
-            return result;
-        }
-        else {
-            let res = await User.updateOne({ _id: data.id },
-                {
-                    username: data.username,
-                    phone: data.phone,
-                    address: data.address,
-                    role: data.role,
-                    image: data.image
-                });
-            let result = {
-                DT: res,
-                EC: 0,
-                EM: "Update user succeed"
-            };
-            return result;
-        }
+        let res = await User.updateOne({ _id: data.id },
+            {
+                username: data.username,
+                phone: data.phone,
+                address: data.address,
+                role: data.role,
+            });
+        let result = {
+            DT: res,
+            EC: 0,
+            EM: "Update user succeed"
+        };
+        return result;
 
     } catch (error) {
         let result = {

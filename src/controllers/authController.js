@@ -6,9 +6,8 @@ module.exports = {
         let role = "USER";
         let address = "";
         let phone = "";
-        let image = "";
         let data = {
-            username, password, address, phone, email, role, image
+            username, password, address, phone, email, role
         }
         let result = await register(data);
         return res.status(200).json(

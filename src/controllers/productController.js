@@ -81,7 +81,8 @@ module.exports = {
 
     getProductByCat: async (req, res) => {
         let category = req.query.category;
-        let result = await getProductbyCat(category);
+        let index = req.query.index;
+        let result = await getProductbyCat(category, index);
 
         return res.status(200).json(
             {

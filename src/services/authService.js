@@ -9,7 +9,6 @@ const register = async (data) => {
             address: data.address,
             phone: data.phone,
             role: data.role,
-            image: data.image
         })
         let result = {
             DT: res,

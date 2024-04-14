@@ -96,26 +96,50 @@ module.exports = {
         }
     },
 
-    getProductbyCat: async (category) => {
+    getProductbyCat: async (category, index) => {
         try {
             if (category) {
-                let res = await Product.find({ category: category }).sort({ createdAt: -1 }).exec();
+                if (index && index !== "0") {
+                    let res = await Product.find({ category: category }).sort({ price: +index }).exec();
+                    let result = {
+                        DT: res,
+                        EC: 0,
+                        EM: "GetAll list product succeed"
+                    };
+                    return result;
+                }
+                else {
 
-                let result = {
-                    DT: res,
-                    EC: 0,
-                    EM: "GetAll list product succeed"
-                };
-                return result;
+                    let res = await Product.find({ category: category }).sort({ createdAt: -1 }).exec();
+
+                    let result = {
+                        DT: res,
+                        EC: 0,
+                        EM: "GetAll list product succeed"
+                    };
+                    return result;
+                }
             } else {
-                let res = await Product.find().sort({ createdAt: -1 }).exec();
+                if (index && index !== "0") {
+                    let res = await Product.find().sort({ price: index }).exec();
+                    let result = {
+                        DT: res,
+                        EC: 0,
+                        EM: "GetAll list product succeed"
+                    };
+                    return result;
+                }
+                else {
 
-                let result = {
-                    DT: res,
-                    EC: 0,
-                    EM: "GetAll list product succeed"
-                };
-                return result;
+                    let res = await Product.find().sort({ createdAt: -1 }).exec();
+
+                    let result = {
+                        DT: res,
+                        EC: 0,
+                        EM: "GetAll list product succeed"
+                    };
+                    return result;
+                }
             }
         } catch (error) {
             let result = {

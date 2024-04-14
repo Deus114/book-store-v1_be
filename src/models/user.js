@@ -15,7 +15,6 @@ const userSchema = new mongoose.Schema(
         address: String,
         phone: String,
         role: String,
-        image: String,
     },
     { timestamps: true }
 )
