@@ -2,20 +2,31 @@ const User = require("../models/user");
 
 const register = async (data) => {
     try {
-        let res = await User.create({
-            email: data.email,
-            password: data.password,
-            username: data.username,
-            address: data.address,
-            phone: data.phone,
-            role: data.role,
-        })
-        let result = {
-            DT: res,
-            EC: 0,
-            EM: "Create user success"
-        };
-        return result;
+        let check = await User.findOne({ email: data.email });
+        if (check) {
+            let result = {
+                DT: null,
+                EC: -1,
+                EM: "Email already exist !"
+            };
+            return result;
+        }
+        else {
+            let res = await User.create({
+                email: data.email,
+                password: data.password,
+                username: data.username,
+                address: data.address,
+                phone: data.phone,
+                role: data.role,
+            })
+            let result = {
+                DT: res,
+                EC: 0,
+                EM: "Create user success"
+            };
+            return result;
+        }
     } catch (error) {
         let result = {
             DT: null,

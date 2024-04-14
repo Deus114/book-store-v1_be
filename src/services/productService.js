@@ -36,7 +36,7 @@ module.exports = {
         try {
             let offset = (page - 1) * limit;
             let totalPage = (await Product.find()).length / limit;
-            let res = await Product.find().skip(offset).limit(limit).exec();
+            let res = await Product.find().sort({ createdAt: -1 }).skip(offset).limit(limit).exec();
             let result = {
                 DT: {
                     totalPages: Math.ceil(totalPage),

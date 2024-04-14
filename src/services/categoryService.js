@@ -29,7 +29,7 @@ module.exports = {
             if (limit && page) {
                 let offset = (page - 1) * limit;
                 let totalPage = (await Category.find()).length / limit;
-                let res = await Category.find().skip(offset).limit(limit).exec();
+                let res = await Category.find().sort({ createdAt: -1 }).skip(offset).limit(limit).exec();
                 let result = {
                     DT: {
                         totalPages: Math.ceil(totalPage),

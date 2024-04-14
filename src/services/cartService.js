@@ -73,7 +73,7 @@ module.exports = {
 
     getallCart: async (id) => {
         try {
-            let res = await Cart.find({ userId: id });
+            let res = await Cart.find({ userId: id }).sort({ createdAt: -1 });
             let result = {
                 DT: res,
                 EC: 0,
