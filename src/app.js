@@ -10,7 +10,7 @@ const mongoose = require('mongoose')
 const fileUpload = require('express-fileupload');
 
 const app = express()
-const port = process.env.PORT || 8888
+const port = process.env.PORT || 4000
 const hostname = process.env.HOST_NAME
 
 app.use(express.static(path.join(__dirname, 'src/public/images/uploads')));
