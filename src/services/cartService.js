@@ -108,4 +108,23 @@ module.exports = {
             return result;
         }
     },
+
+    deleteAllCart: async (userId) => {
+        try {
+            let cart = await Cart.deleteMany({ userId: userId });
+            let result = {
+                DT: cart,
+                EC: 0,
+                EM: "Delete success"
+            };
+            return result;
+        } catch (error) {
+            let result = {
+                DT: null,
+                EC: -1,
+                EM: error
+            };
+            return result;
+        }
+    },
 }

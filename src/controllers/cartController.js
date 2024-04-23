@@ -1,4 +1,4 @@
-const { addCart, getallCart, deleteCart } = require("../services/cartService");
+const { addCart, getallCart, deleteCart, deleteAllCart } = require("../services/cartService");
 
 module.exports = {
     postAddCart: async (req, res) => {
@@ -31,6 +31,18 @@ module.exports = {
     delCart: async (req, res) => {
         let id = req.query.id;
         let result = await deleteCart(id)
+        return res.status(200).json(
+            {
+                DT: result.DT,
+                EC: result.EC,
+                EM: result.EM
+            }
+        )
+    },
+
+    delAllCart: async (req, res) => {
+        let id = req.query.userId;
+        let result = await deleteAllCart(id)
         return res.status(200).json(
             {
                 DT: result.DT,
